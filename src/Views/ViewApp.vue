@@ -1,8 +1,26 @@
-import { createStore } from 'vuex'
+<template>
+<div class="container">
+    <div class="block">
+       
+        <ItemList  v-for="(list,index) in lists" :key="list.id" :list="list"></ItemList>
 
-export default createStore({
-  state: {
-    lists: [
+    </div>
+    <div class="block">
+        <SelectedItemList v-for="(list,index) in lists" :list="list"></SelectedItemList>
+      </div>
+
+    
+</div>
+</template>
+<script>
+import { mapGetters } from 'vuex';
+import ItemList from '@/components/ItemList/ItemList.vue'
+import SelectedItemList from '@/components/SelectedItemList/SelectedItemList.vue'
+export default{
+    name: 'ViewApp',
+    data(){
+        return{ 
+            lists: [
       {
         id: 1,
         isSelected: false,
@@ -57,44 +75,39 @@ export default createStore({
         ] },
 
     ]
-  },
-  getters: {
-    getLists: (state) => state.lists,
-    getSelectedItems: (state) => {
-      const selectedItems = [];
-  
-      state.lists.forEach((list) => {
-        list.items.forEach((item) => {
-          if (item.isSelected) {
-            selectedItems.push(item);
-          }
-        });
-      });
-  
-      return selectedItems;
-    }
-  
-  },
-  mutations: {
-    UPDATE_ITEM_SELECT(state, { listId, itemId, isSelected }) {
-      const list = state.lists.find((list) => list.id === listId);
-      
-      if (list) {
-        const item = list.items.find((item) => item.id === itemId);
-        
-        if (item) {
-          item.isSelected = isSelected;
         }
-      }
+},
+computed:{
+// ...mapGetters(['getLists'])
+},
+methods:{
+    selectAllItems(list) {
+      list.isSelected = !list.isSelected;
+      list.items.forEach(item => {
+        item.isSelected = list.isSelected;
+      });
     }
-  
-  },
-  actions: {
-    selectItem({ commit }, { listId, itemId }) {
-      commit('UPDATE_ITEM_SELECT', { listId, itemId, isSelected: true });
-    }
-  
-  },
-  modules: {
-  }
-})
+},
+components:{
+    ItemList,
+    SelectedItemList
+}
+}
+</script>
+
+<style lang="scss">
+ul{
+    list-style-type: disc;
+}
+.container{
+  display: flex;
+    padding: 50px;
+    justify-content: space-between;
+
+}
+.block{
+    width: 40%
+}
+
+
+</style>
