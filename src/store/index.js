@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-
+//сначала хотела сделать через store, но решила все же не усложнять
 export default createStore({
   state: {
     lists: [

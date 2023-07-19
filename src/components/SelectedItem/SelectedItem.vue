@@ -1,30 +1,30 @@
 <template>
     <div v-if="itemList.isSelected">
-    <div class="item" v-for="itemIndex in itemList.quantity" :key="itemIndex" :style="{ backgroundColor: itemList.color }"
-    @click="removeItem"></div>
-   </div>
+        <div class="item" v-for="itemIndex in itemList.quantity" :key="itemIndex"
+            :style="{ backgroundColor: itemList.color }" @click="removeItem"></div>
+    </div>
 </template>
 
 <script>
-export default{
+export default {
     name: 'SelectedItem',
-    props:{
-        itemList:{
+    props: {
+        itemList: {
             type: Object,
-            default: () => {}
+            default: () => { }
         }
     },
-    data(){
-        return{
+    data() {
+        return {
 
         }
     },
-    methods:{
-    removeItem(){
-        this.itemList.quantity--
+    methods: {
+        removeItem() {
+            this.itemList.quantity--
+        }
     }
-    }
-   
+
 }
 
 </script>
