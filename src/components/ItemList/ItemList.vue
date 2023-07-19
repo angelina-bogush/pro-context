@@ -30,7 +30,7 @@ export default {
         openList() {
             this.isOpened = !this.isOpened
         },
-        chooseAllItems(list) {
+        chooseAllItems(list) {                  // не сделано: изменение checkbox на точку при нескольких выбранных элементах
             list.isSelected = !list.isSelected;
             list.items.forEach(item => {
                 item.isSelected = list.isSelected;
